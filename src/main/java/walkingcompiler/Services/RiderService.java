@@ -4,7 +4,7 @@ import walkingcompiler.data.models.Rider;
 
 @Service
 public interface RiderService {
-    Rider findByRiderId(String riderId);
+    Object findByRiderId(String riderId);
     Rider findByFirstName(String firstName);
     Rider findByLastName(String lastName);
     Rider findByEmail(String email);

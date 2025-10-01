@@ -3,6 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import walkingcompiler.data.models.Product;
 import walkingcompiler.data.repository.ProductRepository;
+import walkingcompiler.exceptions.ProductNotFoundException;
+import walkingcompiler.exceptions.ProductOutOfStockException;
 import java.util.List;
 
 @Service
@@ -13,46 +15,55 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findByproductId(String productId) {
-        return null;
+        if (productId.matches(productId)) {
+            return productRepository.findByproductId(productId);
+        } else {
+            throw new ProductNotFoundException("Product not found");
+        }
     }
 
     @Override
     public Product findByProductName(String productName) {
-        return null;
+        return productRepository.findByProductName(productName);
     }
 
     @Override
     public Product findByProductDescription(String productDescription) {
-        return null;
+        return productRepository.findByProductDescription(productDescription);
     }
 
     @Override
     public Product findByProductCategory(String productCategory) {
-        return null;
+        return productRepository.findByProductCategory(productCategory);
     }
 
     @Override
     public Product findByProductPrice(String productPrice) {
-        return null;
+        return productRepository.findByProductPrice(productPrice);
     }
 
     @Override
     public Product findByProductType(String productType) {
-        return null;
+        return productRepository.findByProductType(productType);
     }
 
     @Override
     public Product findByProductBrand(String productBrand) {
-        return null;
+        return productRepository.findByProductBrand(productBrand);
     }
 
     @Override
     public Product findByProductSize(String productSize) {
-        return null;
+        return productRepository.findByProductSize(productSize);
     }
 
     @Override
     public List<Product> findAllProducts() {
-        return List.of();
+        List<Product> products = productRepository.findAllProducts();
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException("No products found");
+        } else {
+            throw new ProductOutOfStockException(STR."There are \{products.size()} products");
+        }
     }
 }

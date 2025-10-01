@@ -29,4 +29,5 @@ public class MerchantDto {
     private String bankName;
     private String bankAccountType;
     private String bankAccountNumber;
+    private String creditCard;
 }
