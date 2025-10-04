@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import walkingcompiler.data.models.Rider;
 import walkingcompiler.data.repository.RiderRepository;
 import walkingcompiler.exceptions.*;
-
 import java.util.concurrent.TimeoutException;
 
 @Service
