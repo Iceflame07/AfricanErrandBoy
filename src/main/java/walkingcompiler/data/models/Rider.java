@@ -1,8 +1,14 @@
 package walkingcompiler.data.models;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Rider {
 
     @Id
@@ -24,4 +30,5 @@ public class Rider {
     private String bankName;
     private String bankAccountType;
     private String bankAccountNumber;
+
 }

@@ -80,7 +80,7 @@ public class UserServicesImpl implements UserServices {
     public List<User> findByCountry(String country) {
         List<User> users = (List<User>) userRepository.findByCountry(country);
         if (users.isEmpty()) {
-            throw new CountryNotFoundException("No users found for country: " + country);
+            throw new CountryNotFoundException(STR."No users found for country: \{country}");
         }
         return users;
     }
@@ -89,7 +89,7 @@ public class UserServicesImpl implements UserServices {
     public Optional<User> findByZipCode(String zipCode) {
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByZipCode(zipCode));
         if (userOptional.isEmpty()) {
-            throw new ZipCodeNotFoundException("User not found for zip code: " + zipCode);
+            throw new ZipCodeNotFoundException(STR."User not found for zip code: \{zipCode}");
         }
         return userOptional;
     }
@@ -98,7 +98,7 @@ public class UserServicesImpl implements UserServices {
     public User findByBankName(String bankName) {
         Optional<User> bank = Optional.ofNullable(userRepository.findByBankName(bankName));
         if (bank.isEmpty()) {
-            throw new BankNameNotFoundException("No users found for bank: " + bankName);
+            throw new BankNameNotFoundException(STR."No users found for bank: \{bankName}");
         }
         return userRepository.findByBankName(bankName);
     }
