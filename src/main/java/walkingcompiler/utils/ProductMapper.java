@@ -6,7 +6,7 @@ import walkingcompiler.data.models.Product;
 @UUID
 public class ProductMapper {
 
-    public static Product mapToProductDto(ProductDto product) {
+    public static Product mapToProductDto(Product product) {
         return new Product(
                 product.getProductId(),
                 product.getProductName(),

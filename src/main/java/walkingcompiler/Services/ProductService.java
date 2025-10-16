@@ -1,7 +1,6 @@
 package walkingcompiler.Services;
 import org.springframework.stereotype.Service;
 import walkingcompiler.data.models.Product;
-
 import java.util.List;
 
 @Service
