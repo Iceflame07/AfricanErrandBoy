@@ -10,7 +10,8 @@ import walkingcompiler.Services.RiderService;
 import walkingcompiler.data.models.Rider;
 import walkingcompiler.utils.RiderMapper;
 
-@RestController("/api")
+
+@RestController("/RiderController")
 @RequiredArgsConstructor
 public class RiderController {
 

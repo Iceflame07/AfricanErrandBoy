@@ -11,7 +11,7 @@ import walkingcompiler.data.models.Product;
 import walkingcompiler.utils.ProductMapper;
 
 
-@RestController("/api")
+@RestController("/ProductController")
 @RequiredArgsConstructor
 public class ProductController {
 
