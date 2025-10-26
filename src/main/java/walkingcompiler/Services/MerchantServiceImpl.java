@@ -15,12 +15,8 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     public Merchant findByMerchantId(String merchantId) {
-        Optional<Merchant> merchant = Optional.ofNullable(merchantRepository.findByMerchantId(merchantId));
-        if (merchant.isPresent()) {
-            return merchant.get();
-        } else {
-            throw new MerchantNotFoundException("Merchant not found");
-        }
+        return Optional.ofNullable(merchantRepository.findByMerchantId(merchantId))
+                .orElseThrow(() -> new MerchantNotFoundException("Merchant not found"));
     }
 
     @Override
@@ -30,117 +26,154 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     public Merchant findByFirstName(String firstName) {
-        if (merchantRepository.findByFirstName(firstName) != null) {
-            return merchantRepository.findByFirstName(firstName);
-        } else {
-            throw new NameNotFoundException("Name not found");
-        }
+        return Optional.ofNullable(merchantRepository.findByFirstName(firstName))
+                .orElseThrow(() -> new NameNotFoundException("Name not found"));
     }
 
     @Override
     public Merchant findByLastName(String lastName) {
-        if (merchantRepository.findByLastName(lastName) != null) {
-            return merchantRepository.findByFirstName(lastName);
-        } else {
-            throw new NameNotFoundException("Name not found");
-        }
+        return Optional.ofNullable(merchantRepository.findByLastName(lastName))
+                .orElseThrow(() -> new NameNotFoundException("Name not found"));
     }
 
     @Override
     public Merchant findByEmail(String email) {
-        if (merchantRepository.findByEmail(email) != null) {
-            return merchantRepository.findByEmail(email);
-        } else {
-            throw new InvalidEmailException("Email not found");
-        }
+        return Optional.ofNullable(merchantRepository.findByEmail(email))
+                .orElseThrow(() -> new InvalidEmailException("Email not found"));
     }
 
     @Override
     public Merchant findByContact(String contact) {
-        return merchantRepository.findByContact(contact);
+        return Optional.ofNullable(merchantRepository.findByContact(contact))
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found"));
     }
 
     @Override
     public Merchant findByDOB(String dob) {
-        return merchantRepository.findByDOB(dob);
+        return Optional.ofNullable(merchantRepository.findByDOB(dob))
+                .orElseThrow(() -> new DOBNotFoundException("DOB not found"));
     }
 
     @Override
     public Merchant findByGender(String gender) {
-        return merchantRepository.findByGender(gender);
+        return Optional.ofNullable(merchantRepository.findByGender(gender))
+                .orElseThrow(() -> new GenderNotFoundException("Gender not found"));
     }
 
     @Override
     public Merchant findByStreetNumber(String streetNumber) {
-        return merchantRepository.findByStreetNumber(streetNumber);
+        return Optional.ofNullable(merchantRepository.findByStreetNumber(streetNumber))
+                .orElseThrow(() -> new StreetNumberNotFoundException("Street number not found"));
     }
 
     @Override
     public Merchant findByStreetName(String streetName) {
-        return merchantRepository.findByStreetName(streetName);
+        return Optional.ofNullable(merchantRepository.findByStreetName(streetName))
+                .orElseThrow(() -> new StreetNameNotFoundException("Street name not found"));
     }
 
     @Override
     public Merchant findByCity(String city) {
-        return merchantRepository.findByCity(city);
+        return Optional.ofNullable(merchantRepository.findByCity(city))
+                .orElseThrow(() -> new CityNotFoundException("City not found"));
     }
 
     @Override
     public Merchant findByState(String state) {
-        return merchantRepository.findByState(state);
+        return Optional.ofNullable(merchantRepository.findByState(state))
+                .orElseThrow(() -> new StateNotFoundException("State not found"));
     }
 
     @Override
     public Merchant findByZipCode(String zipCode) {
-        Merchant merchant = merchantRepository.findByZipCode(zipCode);
+        if (zipCode == null) {
+            throw new IllegalArgumentException("Zip code cannot be null");
+        }
+        return Optional.ofNullable(merchantRepository.findByZipCode(zipCode))
+                .orElseThrow(() -> new ZipCodeNotFoundException("No merchant found for zip code: " + zipCode));
+    }
+
+    @Override
+    public Merchant findByCountry(String country) {
+        if (country == null || country.trim().isEmpty()) {
+            throw new IllegalArgumentException("Country cannot be null or empty");
+        }
+        List<Merchant> merchants = (List<Merchant>) merchantRepository.findByCountry(country);
+        if (merchants.isEmpty()) {
+            throw new CountryNotFoundException("No merchant found for country: " + country);
+        }
+        if (merchants.size() > 1) {
+            throw new IllegalStateException("Multiple merchants found for country: " + country);
+        }
+        return merchants.get(0);
+    }
+
+    @Override
+    public Merchant findByBusinessName(String businessName) {
+        Merchant merchant = merchantRepository.findByBusinessName(businessName);
         if (merchant == null) {
-            throw new ZipCodeNotFoundException(STR."User not found for zip code: \{zipCode}");
+            throw new BusinessNameNotFoundException("No user found for this businessName: " + businessName);
         }
         return merchant;
     }
 
     @Override
-    public Merchant findByCountry(String country) {
-        List<Merchant> merchants = (List<Merchant>) merchantRepository.findByCountry(country);
-        if (merchants.isEmpty()) {
-            throw new CountryNotFoundException(STR."No merchant found for country: \{country}");
-        }
-        return (Merchant) merchants;
-    }
-
-    @Override
-    public Merchant findByBusinessName(String businessName) {
-        Merchant name = merchantRepository.findByBusinessName(businessName);
-        if (businessName.isEmpty()) {
-            throw new BusinessNameNotFoundException(STR."No user found for this businessName: \{businessName}");
-        }
-        return name;
-    }
-
-    @Override
     public Merchant findByBankName(String bankName) {
-        Optional<Merchant> bank = Optional.ofNullable(merchantRepository.findByBankName(bankName));
-        if (bank.isEmpty()) {
-            throw new BankNameNotFoundException(STR."No user found for bank: \{bankName}");
+        if (bankName == null || bankName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Bank name cannot be null or empty");
         }
-        return merchantRepository.findByBankName(bankName);
+        return Optional.ofNullable(merchantRepository.findByBankName(bankName))
+                .orElseThrow(() -> new BankNameNotFoundException("No merchant found for bank: " + bankName));
     }
 
     @Override
     public Merchant findByBankAccountType(String bankAccountType) {
-        return merchantRepository.findByBankAccountType(bankAccountType);
+        return Optional.ofNullable(merchantRepository.findByBankAccountType(bankAccountType))
+                .orElseThrow(() -> new BankAccountTypeNotFoundException("Bank account type not found"));
     }
 
     @Override
     public Merchant findByBankAccountNumber(String bankAccountNumber) {
-        return merchantRepository.findByBankAccountNumber(bankAccountNumber);
+        return Optional.ofNullable(merchantRepository.findByBankAccountNumber(bankAccountNumber))
+                .orElseThrow(() -> new BankAccountNumberNotFoundException("Bank account number not found"));
     }
 
     @Override
-    public Merchant findByCreditCard(String creditCard) {
-        if(creditCard.isEmpty()) {
-            throw new CreditCardNotFound("Invalid Credit Card");
+    public Merchant findByMerchantVisaCard(String merchantVisaCard) {
+        if (merchantVisaCard.length() == 16 || merchantVisaCard.startsWith("4")) {
+            return Optional.ofNullable(merchantRepository.findByMerchantVisaCard(merchantVisaCard))
+                    .orElseThrow(() -> new CreditCardNotFoundException("Visa card not found: " + merchantVisaCard));
+        } else {
+            throw new IllegalArgumentException("Invalid Visa card number");
         }
-        return merchantRepository.findByCreditCard(creditCard);
+    }
+
+    @Override
+    public Optional<Merchant> findByMerchantMasterCard1(String merchantMasterCard1) {
+        if (merchantMasterCard1.length() == 16 || merchantMasterCard1.startsWith("5")) {
+            return Optional.ofNullable(merchantRepository.findByMerchantMasterCard1(merchantMasterCard1));
+        } else {
+            throw new IllegalArgumentException("Invalid MasterCard number");
+        }
+    }
+
+    @Override
+    public Merchant findByMerchantMasterCard2(String merchantMasterCard2) {
+        if (merchantMasterCard2.length() == 16 || merchantMasterCard2.startsWith("2")) {
+            return Optional.ofNullable(merchantRepository.findByMerchantMasterCard2(merchantMasterCard2))
+                    .orElseThrow(() -> new CreditCardNotFoundException("MasterCard not found: " + merchantMasterCard2));
+        } else {
+            throw new IllegalArgumentException("Invalid MasterCard number");
+        }
+    }
+
+    @Override
+    public Merchant findByMerchantVerveCard(String merchantVerveCard) {
+        if (merchantVerveCard.length() == 16 || merchantVerveCard.startsWith("65")) {
+            return Optional.ofNullable(merchantRepository.findByMerchantVerveCard(merchantVerveCard))
+                    .orElseThrow(() -> new CreditCardNotFoundException("Verve card not found: " + merchantVerveCard));
+        } else {
+            throw new IllegalArgumentException("Invalid Verve card number");
+        }
     }
 }

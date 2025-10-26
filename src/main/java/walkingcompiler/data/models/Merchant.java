@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @AllArgsConstructor
+@Entity
 public class Merchant {
 
     @Id
@@ -17,7 +18,7 @@ public class Merchant {
     private String lastName;
     private String email;
     private String contact;
-    private String DOB;
+    private String dob;
     private String gender;
     private String streetNumber;
     private String streetName;
@@ -29,5 +30,8 @@ public class Merchant {
     private String bankName;
     private String bankAccountType;
     private String bankAccountNumber;
-    private String creditCard;
+    private String merchantVisaCard;
+    private String merchantMasterCard1;
+    private String merchantMasterCard2;
+    private String merchantVerveCard;
 }

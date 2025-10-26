@@ -1,4 +1,4 @@
-package walkingcompiler.Dto;
+package walkingcompiler.data.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -26,6 +26,10 @@ public class UserDto {
     private String country;
     private String zipCode;
     private String bankName;
-    private String bankAccountType;
     private String bankAccountNumber;
+    private String bankAccountType;
+    private String userVisaCard;
+    private String userMasterCard1;
+    private String userMasterCard2;
+    private String userVerveCard;
 }

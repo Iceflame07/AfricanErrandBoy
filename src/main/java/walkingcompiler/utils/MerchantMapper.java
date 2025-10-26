@@ -1,6 +1,5 @@
 package walkingcompiler.utils;
 import org.hibernate.validator.constraints.UUID;
-import walkingcompiler.Dto.MerchantDto;
 import walkingcompiler.data.models.Merchant;
 
 @UUID
@@ -13,7 +12,7 @@ public class MerchantMapper {
                 merchant.getLastName(),
                 merchant.getEmail(),
                 merchant.getContact(),
-                merchant.getDOB(),
+                merchant.getDob(),
                 merchant.getGender(),
                 merchant.getStreetNumber(),
                 merchant.getStreetName(),
@@ -25,18 +24,21 @@ public class MerchantMapper {
                 merchant.getBankName(),
                 merchant.getBankAccountType(),
                 merchant.getBankAccountNumber(),
-                merchant.getCreditCard()
+                merchant.getMerchantVisaCard(),
+                merchant.getMerchantMasterCard1(),
+                merchant.getMerchantMasterCard2(),
+                merchant.getMerchantVerveCard()
         );
     }
 
-    public static MerchantDto mapToMerchant(Merchant merchantDto) {
-        return new MerchantDto(
+    public static Merchant mapToMerchant(Merchant merchantDto) {
+        return new Merchant(
                 merchantDto.getMerchantId(),
                 merchantDto.getFirstName(),
                 merchantDto.getLastName(),
                 merchantDto.getEmail(),
                 merchantDto.getContact(),
-                merchantDto.getDOB(),
+                merchantDto.getDob(),
                 merchantDto.getGender(),
                 merchantDto.getStreetNumber(),
                 merchantDto.getStreetName(),
@@ -48,7 +50,10 @@ public class MerchantMapper {
                 merchantDto.getBankName(),
                 merchantDto.getBankAccountType(),
                 merchantDto.getBankAccountNumber(),
-                merchantDto.getCreditCard()
+                merchantDto.getMerchantVisaCard(),
+                merchantDto.getMerchantMasterCard1(),
+                merchantDto.getMerchantMasterCard2(),
+                merchantDto.getMerchantVerveCard()
         );
     }
 }

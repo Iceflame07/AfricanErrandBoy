@@ -2,6 +2,8 @@ package walkingcompiler.Services;
 import org.springframework.stereotype.Service;
 import walkingcompiler.data.models.Merchant;
 
+import java.util.Optional;
+
 @Service
 public interface MerchantService {
     Merchant findByMerchantId(String merchantId);
@@ -22,5 +24,8 @@ public interface MerchantService {
     Merchant findByBankName(String bankName);
     Merchant findByBankAccountType(String bankAccountType);
     Merchant findByBankAccountNumber(String bankAccountNumber);
-    Merchant findByCreditCard(String creditCard);
+    Merchant findByMerchantVisaCard(String merchantVisaCard);
+    Optional<Merchant> findByMerchantMasterCard1(String merchantMasterCard1);
+    Merchant findByMerchantMasterCard2(String merchantMasterCard2);
+    Merchant findByMerchantVerveCard(String merchantVerveCard);
 }

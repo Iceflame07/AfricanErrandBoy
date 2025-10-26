@@ -3,9 +3,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import walkingcompiler.Dto.UserDto;
 import walkingcompiler.Services.UserServices;
 import walkingcompiler.data.models.User;
+import walkingcompiler.data.models.UserDto;
 import walkingcompiler.utils.UserMapper;
 import java.util.List;
 import java.util.Optional;
@@ -82,8 +82,13 @@ public class UserController {
         User bank = userServices.findByBankName(user.getBankName());
         return new ResponseEntity<>(UserMapper.mapToUserDto(bank), HttpStatus.CREATED);
     }
+
+    @PostMapping("/userVisaCard")
+    public ResponseEntity<User> userVisaCard(@RequestBody UserDto user) {
+
+    }
     
-    @GetMapping
+    @GetMapping("/save")
     public ResponseEntity<UserDto> save(@RequestBody User userDto){
         UserDto found = UserMapper.mapToUser(userDto);
         User info = userServices.findByUserId(String.valueOf(found));

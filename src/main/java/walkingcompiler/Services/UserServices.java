@@ -22,4 +22,8 @@ public interface UserServices {
     User findByBankName(String bankName);
     User findByBankAccountType(String bankAccountType);
     User findByBankAccountNumber(String bankAccountNumber);
+    User findByUserVisaCard(String userVisaCard);
+    Optional<User> findByUserMasterCard1(String userMasterCard1);
+    User findByUserMasterCard2(String userMasterCard2);
+    User findByUserVerveCard(String userVerveCard);
 }

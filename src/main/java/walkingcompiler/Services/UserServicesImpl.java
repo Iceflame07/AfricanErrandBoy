@@ -112,4 +112,24 @@ public class UserServicesImpl implements UserServices {
     public User findByBankAccountNumber(String bankAccountNumber) {
         return userRepository.findByBankAccountNumber(bankAccountNumber);
     }
+
+    @Override
+    public User findByUserVisaCard(String userVisaCard) {
+        return null;
+    }
+
+    @Override
+    public Optional<User> findByUserMasterCard1(String userMasterCard1) {
+        return Optional.empty();
+    }
+
+    @Override
+    public User findByUserMasterCard2(String userMasterCard2) {
+        return null;
+    }
+
+    @Override
+    public User findByUserVerveCard(String userVerveCard) {
+        return null;
+    }
 }

@@ -1,7 +1,7 @@
 package walkingcompiler.utils;
 import org.hibernate.validator.constraints.UUID;
-import walkingcompiler.Dto.UserDto;
 import walkingcompiler.data.models.User;
+import walkingcompiler.data.models.UserDto;
 
 @UUID
 public class UserMapper {
@@ -23,7 +23,11 @@ public class UserMapper {
                 userDto.getZipCode(),
                 userDto.getBankName(),
                 userDto.getBankAccountType(),
-                userDto.getBankAccountNumber()
+                userDto.getBankAccountNumber(),
+                userDto.getUserVisaCard(),
+                userDto.getUserMasterCard1(),
+                userDto.getUserMasterCard2(),
+                userDto.getUserVerveCard()
         );
     }
 
@@ -44,7 +48,11 @@ public class UserMapper {
                 user.getZipCode(),
                 user.getBankName(),
                 user.getBankAccountType(),
-                user.getBankAccountNumber()
+                user.getBankAccountNumber(),
+                user.getUserVisaCard(),
+                user.getUserMasterCard1(),
+                user.getUserMasterCard2(),
+                user.getUserVerveCard()
         );
     }
 }

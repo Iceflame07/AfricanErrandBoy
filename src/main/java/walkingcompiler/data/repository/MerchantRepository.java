@@ -23,5 +23,8 @@ public interface MerchantRepository {
     Merchant findByBankName(String bankName);
     Merchant findByBankAccountType(String bankAccountType);
     Merchant findByBankAccountNumber(String bankAccountNumber);
-    Merchant findByCreditCard(String creditCard);
+    Merchant findByMerchantVisaCard(String merchantVisaCard);
+    Merchant findByMerchantMasterCard1(String merchantMasterCard1);
+    Merchant findByMerchantMasterCard2(String merchantMasterCard2);
+    Merchant findByMerchantVerveCard(String merchantVerveCard);
 }

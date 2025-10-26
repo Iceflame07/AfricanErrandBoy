@@ -7,13 +7,13 @@ public class MerchantTest {
 
     @Test
     public void testForAvailableMerchants() {
-        Merchant seller = new Merchant("", "","","","","","","","","","","","","","","","","");
+        Merchant seller = new Merchant("", "","","","","","","","","","","","","","","","","","","","");
         seller.setMerchantId("");
         seller.setFirstName("");
         seller.setLastName("");
         seller.setEmail("");
         seller.setContact("");
-        seller.setDOB("");
+        seller.setDob("");
         seller.setGender("");
         seller.setStreetNumber("");
         seller.setStreetName("");
@@ -25,13 +25,16 @@ public class MerchantTest {
         seller.setBankName("");
         seller.setBankAccountType("");
         seller.setBankAccountNumber("");
-        seller.setCreditCard("");
+        seller.setMerchantVisaCard("");
+        seller.setMerchantMasterCard1("");
+        seller.setMerchantMasterCard2("");
+        seller.setMerchantVerveCard("");
         Assertions.assertEquals("", seller.getMerchantId());
         Assertions.assertEquals("", seller.getFirstName());
         Assertions.assertEquals("", seller.getLastName());
         Assertions.assertEquals("", seller.getEmail());
         Assertions.assertEquals("", seller.getContact());
-        Assertions.assertEquals("", seller.getDOB());
+        Assertions.assertEquals("", seller.getDob());
         Assertions.assertEquals("", seller.getGender());
         Assertions.assertEquals("", seller.getStreetNumber());
         Assertions.assertEquals("", seller.getStreetName());
@@ -43,6 +46,9 @@ public class MerchantTest {
         Assertions.assertEquals("", seller.getBankName());
         Assertions.assertEquals("", seller.getBankAccountType());
         Assertions.assertEquals("", seller.getBankAccountNumber());
-        Assertions.assertEquals("", seller.getCreditCard());
+        Assertions.assertEquals("", seller.getMerchantVisaCard());
+        Assertions.assertEquals("", seller.getMerchantMasterCard1());
+        Assertions.assertEquals("", seller.getMerchantMasterCard2());
+        Assertions.assertEquals("", seller.getMerchantVerveCard());
     }
 }

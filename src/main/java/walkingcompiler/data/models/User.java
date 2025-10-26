@@ -26,6 +26,10 @@ public class User {
     private String country;
     private String zipCode;
     private String bankName;
-    private String bankAccountType;
     private String bankAccountNumber;
+    private String bankAccountType;
+    private String userVisaCard;
+    private String userMasterCard1;
+    private String userMasterCard2;
+    private String userVerveCard;
 }
