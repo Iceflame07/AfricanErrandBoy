@@ -9,7 +9,6 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity
 public class Merchant {
 
     @Id

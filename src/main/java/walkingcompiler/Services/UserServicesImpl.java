@@ -119,7 +119,7 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public Optional<User> findByUserMasterCard1(String userMasterCard1) {
+    public User findByUserMasterCard1(String userMasterCard1) {
         return Optional.empty();
     }
 

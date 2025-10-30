@@ -1,4 +1,5 @@
 package walkingcompiler.controllers;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,10 +85,45 @@ public class UserController {
     }
 
     @PostMapping("/userVisaCard")
-    public ResponseEntity<User> userVisaCard(@RequestBody UserDto user) {
-
+    public ResponseEntity<UserDto> userVisaCard(@RequestBody UserDto visaCard) {
+        User visa = userServices.findByUserVisaCard(visaCard.getUserVisaCard());
+        return new ResponseEntity<>(UserMapper.mapToUser(visa), HttpStatus.OK);
     }
-    
+
+    @PostMapping("/userMasterCard1")
+    public ResponseEntity<User> userMasterCard1(@RequestBody UserDto masterCard1) {
+        Optional<User> master1 = Optional.ofNullable(userServices.findByUserMasterCard1(masterCard1.getUserMasterCard1()));
+        return master1.map(foundUser -> new ResponseEntity<>(UserMapper.mapToUserDto(foundUser), HttpStatus.CREATED))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/userMasterCard2")
+    public ResponseEntity<UserDto> getUserByMasterCard2(@RequestBody UserDto masterCard2) {
+        String cardNumber = String.valueOf(userServices.findByUserMasterCard2(masterCard2.getUserMasterCard2()));
+
+        if (cardNumber == null || cardNumber.isBlank()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        User user = userServices.findByUserMasterCard2(cardNumber);
+
+        return user != null
+                ? ResponseEntity.ok(UserMapper.mapToUserDto(user))
+                : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/userVerveCard")
+    public ResponseEntity<User> getUserByVerveCard(@RequestBody UserDto verveCardDto) {
+        if (verveCardDto == null || verveCardDto.getUserVerveCard() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        String verveCardNumber = verveCardDto.getUserVerveCard();
+        Optional<User> userOpt = Optional.ofNullable(userServices.findByUserVerveCard(verveCardNumber));
+        return userOpt
+                .map(user -> ResponseEntity.ok(UserMapper.mapToUserDto(user)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/save")
     public ResponseEntity<UserDto> save(@RequestBody User userDto){
         UserDto found = UserMapper.mapToUser(userDto);
