@@ -3,12 +3,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UUID;
 import org.springframework.data.annotation.Id;
 
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
+@UUID
 public class Product {
 
     @Id

@@ -1,8 +1,8 @@
 package walkingcompiler.utils;
-import org.hibernate.validator.constraints.UUID;
+import org.springframework.stereotype.Component;
 import walkingcompiler.data.models.Merchant;
 
-@UUID
+@Component
 public class MerchantMapper {
 
     public static Merchant mapToMerchantDto(Merchant merchant) {

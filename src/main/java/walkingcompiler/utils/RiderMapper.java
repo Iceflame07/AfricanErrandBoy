@@ -1,9 +1,9 @@
 package walkingcompiler.utils;
-import org.hibernate.validator.constraints.UUID;
+import org.springframework.stereotype.Component;
 import walkingcompiler.Dto.RiderDto;
 import walkingcompiler.data.models.Rider;
 
-@UUID
+@Component
 public class RiderMapper {
 
     public static Rider mapToRiderDto(Rider riderDto) {

@@ -1,12 +1,11 @@
 package walkingcompiler.controllers;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import walkingcompiler.Dto.UserDto;
 import walkingcompiler.Services.UserServices;
 import walkingcompiler.data.models.User;
-import walkingcompiler.data.models.UserDto;
 import walkingcompiler.utils.UserMapper;
 import java.util.List;
 import java.util.Optional;
@@ -98,7 +97,7 @@ public class UserController {
     }
 
     @PostMapping("/userMasterCard2")
-    public ResponseEntity<UserDto> getUserByMasterCard2(@RequestBody UserDto masterCard2) {
+    public ResponseEntity<? extends Object> getUserByMasterCard2(@RequestBody UserDto masterCard2) {
         String cardNumber = String.valueOf(userServices.findByUserMasterCard2(masterCard2.getUserMasterCard2()));
 
         if (cardNumber == null || cardNumber.isBlank()) {
@@ -125,8 +124,8 @@ public class UserController {
     }
 
     @GetMapping("/save")
-    public ResponseEntity<UserDto> save(@RequestBody User userDto){
-        UserDto found = UserMapper.mapToUser(userDto);
+    public ResponseEntity<UserDto> save(@RequestBody User saveUser) {
+        User found = UserMapper.mapToUserDto(saveUser);
         User info = userServices.findByUserId(String.valueOf(found));
         return new ResponseEntity<>(UserMapper.mapToUser(info), HttpStatus.OK);
     }

@@ -105,31 +105,57 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public User findByBankAccountType(String bankAccountType) {
+        if(bankAccountType == null || bankAccountType.isEmpty()){
+            throw new IllegalArgumentExceptions("Bank account type cannot be empty");
+        }
         return userRepository.findByBankAccountType(bankAccountType);
     }
 
     @Override
     public User findByBankAccountNumber(String bankAccountNumber) {
+        if(bankAccountNumber == null || bankAccountNumber.isEmpty()){
+            throw new IllegalArgumentExceptions("Bank account number cannot be empty");
+        }
         return userRepository.findByBankAccountNumber(bankAccountNumber);
     }
 
     @Override
     public User findByUserVisaCard(String userVisaCard) {
-        return null;
+        if (userVisaCard.length() == 16 || userVisaCard.startsWith("4")) {
+            return Optional.ofNullable(userRepository.findByUserVisaCard(userVisaCard))
+                    .orElseThrow(() -> new CreditCardNotFoundException("Visa card not found: " + userVisaCard));
+        } else {
+            throw new IllegalArgumentException("Invalid user Visa card number");
+        }
     }
 
     @Override
     public User findByUserMasterCard1(String userMasterCard1) {
-        return Optional.empty();
+        if (userMasterCard1.length() == 16 || userMasterCard1.startsWith("4")) {
+            return Optional.ofNullable(userRepository.findByUserMasterCard1(userMasterCard1))
+                    .orElseThrow(() -> new CreditCardNotFoundException("Master card 1 not found: " + userMasterCard1));
+        } else {
+            throw new IllegalArgumentException("Invalid user Master card 1 number");
+        }
     }
 
     @Override
     public User findByUserMasterCard2(String userMasterCard2) {
-        return null;
+        if (userMasterCard2.length() == 16 || userMasterCard2.startsWith("4")) {
+            return Optional.ofNullable(userRepository.findByUserMasterCard2(userMasterCard2))
+                    .orElseThrow(() -> new CreditCardNotFoundException("Master card 2 not found: " + userMasterCard2));
+        } else {
+            throw new IllegalArgumentException("Invalid user Master card 2 number");
+        }
     }
 
     @Override
     public User findByUserVerveCard(String userVerveCard) {
-        return null;
+        if (userVerveCard.length() == 16 || userVerveCard.startsWith("4")) {
+            return Optional.ofNullable(userRepository.findByUserVerveCard(userVerveCard))
+                    .orElseThrow(() -> new CreditCardNotFoundException("Verve card not found: " + userVerveCard));
+        } else {
+            throw new IllegalArgumentException("Invalid user Verve card number");
+        }
     }
 }

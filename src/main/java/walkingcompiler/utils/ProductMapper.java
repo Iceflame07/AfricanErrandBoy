@@ -1,9 +1,9 @@
 package walkingcompiler.utils;
-import org.hibernate.validator.constraints.UUID;
+import org.springframework.stereotype.Component;
 import walkingcompiler.Dto.ProductDto;
 import walkingcompiler.data.models.Product;
 
-@UUID
+@Component
 public class ProductMapper {
 
     public static Product mapToProductDto(Product product) {
