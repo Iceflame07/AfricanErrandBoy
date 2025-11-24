@@ -1,9 +1,10 @@
 package walkingcompiler.data.repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import walkingcompiler.data.models.Rider;
 
 @Repository
-public interface RiderRepository {
+public interface RiderRepository extends MongoRepository<Rider,String> {
     Rider findByRiderId(String riderId);
     Rider findByFirstName(String firstName);
     Rider findByLastName(String lastName);

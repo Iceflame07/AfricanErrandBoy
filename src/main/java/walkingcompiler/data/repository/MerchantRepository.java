@@ -1,9 +1,12 @@
 package walkingcompiler.data.repository;
+import org.apache.logging.log4j.util.Strings;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import walkingcompiler.data.models.Merchant;
 
 @Repository
-public interface MerchantRepository {
+public interface MerchantRepository extends MongoRepository<Merchant, String> {
 
     Merchant findByMerchantId(String merchantId);
     Merchant save(Merchant merchant);
